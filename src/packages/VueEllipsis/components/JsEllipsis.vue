@@ -19,7 +19,6 @@ import {
   isFunction,
   isEffective,
   isSupportRequestAnimationFrame,
-  isUndefined,
   isString,
   isSupportResizeObserver,
 } from '../utils/is';
@@ -81,7 +80,7 @@ export default class extends Vue {
   private throttleFn!: (...args: any[]) => any;
 
   private get realVisibleLine(): number {
-    return isUndefined(this.visibleLine) ? this.maxLine : this.visibleLine;
+    return typeof this.visibleLine === 'undefined' ? this.maxLine : this.visibleLine;
   }
 
   @Watch('text')
@@ -130,11 +129,11 @@ export default class extends Vue {
     const lineHeight = getLineHeight(this.ref);
     const wordBreak = registerWordBreak(this.textRef);
 
-    const maxHeight = isUndefined(this.maxHeight)
+    const maxHeight = typeof this.maxHeight === 'undefined'
       ? lineHeight * this.maxLine
       : this.maxHeight;
 
-    const visibleMaxHeight = isUndefined(this.visibleHeight)
+    const visibleMaxHeight = typeof this.visibleHeight === 'undefined'
         ? lineHeight * this.realVisibleLine
         : this.visibleHeight;
 

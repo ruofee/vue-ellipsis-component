@@ -33,7 +33,7 @@
 import { Vue, Component, Prop } from 'vue-property-decorator';
 import NativeEllipsis from './components/NativeEllipsis.vue';
 import JsEllipsis from './components/JsEllipsis.vue';
-import { isSupportNativeEllipsis, isUndefined } from './utils/is';
+import { isSupportNativeEllipsis } from './utils/is';
 import { ELLIPSIS_NODE } from './const';
 
 function getDefaultEndExcludes(): string[] {
@@ -95,12 +95,12 @@ export default class extends Vue {
       isSupportNativeEllipsis &&
       this.endExcludes.length === 0 &&
       this.ellipsisNode === ELLIPSIS_NODE &&
-      isUndefined(this.$slots.ellipsisNode) &&
-      isUndefined(this.visibleLine) &&
-      isUndefined(this.maxHeight) &&
-      isUndefined(this.visibleHeight) &&
-      isUndefined(this.onReflow) &&
-      isUndefined(this.onEllipsisClick);
+      typeof this.$slots.ellipsisNode === 'undefined' &&
+      typeof this.visibleLine === 'undefined' &&
+      typeof this.maxHeight === 'undefined' &&
+      typeof this.visibleHeight === 'undefined' &&
+      typeof this.onReflow === 'undefined' &&
+      typeof this.onEllipsisClick === 'undefined';
 
     return useNativeEllipsis;
   }
