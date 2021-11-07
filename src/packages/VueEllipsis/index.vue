@@ -11,7 +11,7 @@
       :text="text"
       :use-inner-html="useInnerHtml"
       :max-line="maxLine"
-      :visable-line="visibleLine"
+      :visible-line="visibleLine"
       :max-height="maxHeight"
       :visible-height="visibleHeight"
       :ellipsis="ellipsis"
