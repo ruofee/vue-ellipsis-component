@@ -14,9 +14,8 @@
     "baseUrl": ".",
     "types": [
       "webpack-env",
-      "mocha",
-      "chai",
-      "resize-observer-browser"
+      "resize-observer-browser",
+      "jest"
     ],
     "paths": {
       "@/*": [

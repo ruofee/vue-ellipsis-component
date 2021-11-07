@@ -16,6 +16,7 @@
     "ordered-imports": false,
     "quotemark": [true, "single"],
     "only-arrow-functions": false,
-    "arrow-parens": false
+    "arrow-parens": false,
+    "no-empty": false
   }
 }
