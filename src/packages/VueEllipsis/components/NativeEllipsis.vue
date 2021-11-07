@@ -1,9 +1,9 @@
 <template>
   <div
     :class="['vue-ellipsis-native', { ellipsis }]"
-    :style="{ WebkitLineClamp: maxLine }">
-    <span v-if="useInnerHtml" v-html="text" />
-    <span v-else>{{ text }}</span>
+    :style="{ webkitLineClamp: maxLine }">
+    <span v-if="useInnerHtml" v-html="text" class="vue-ellipsis-native-html" />
+    <span v-else class="vue-ellipsis-native-text">{{ text }}</span>
   </div>
 </template>
 
