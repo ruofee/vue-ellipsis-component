@@ -1,8 +1,8 @@
-import VueEllipsis from '@/packages/VueEllipsis/index.vue';
-import JsEllipsis from '@/packages/VueEllipsis/components/JsEllipsis.vue';
+import { VueConstructor } from 'vue';
+import VueEllipsis from '../../packages/index.vue';
 import { mount, MountOptions } from '@vue/test-utils';
 
-const getWrapper = (options?: MountOptions<any>) => mount(VueEllipsis, options);
+const getWrapper = (options?: MountOptions<any>) => mount(VueEllipsis as VueConstructor, options);
 const text = '这是一段非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常长的文本';
 const html = '<b>这是一段</b>非常非常非常非常非常非常非常非常非常非常非常非常非常长的文本';
 
@@ -113,33 +113,5 @@ describe('vue-ellipsis.vue', () => {
     });
 
     expect(wrapper.find('.vue-ellipsis-js-ellipsis').text()).toBe(ellipsisNode);
-  });
-
-  it('[js-ellipsis] maxLine 是否生效', () => {
-    const maxLine = 3;
-    const wrapper = getWrapper({
-      propsData: {
-        text,
-        maxLine,
-        onReflow() {},
-      },
-    });
-
-    expect((wrapper.findComponent(JsEllipsis).vm as any).realVisibleLine).toBe(maxLine);
-  });
-
-  it('[js-ellipsis] visibleLine 是否生效', () => {
-    const maxLine = 3;
-    const visibleLine = 2;
-    const wrapper = getWrapper({
-      propsData: {
-        text,
-        maxLine,
-        visibleLine,
-        onReflow() {},
-      },
-    });
-
-    expect((wrapper.findComponent(JsEllipsis).vm as any).realVisibleLine).toBe(visibleLine);
   });
 });

@@ -28,4 +28,8 @@ export default class App extends Vue {}
   border-radius: 4px;
   background-color: #eee;
 }
+#app {
+  width: 200px;
+  line-height: 16px;
+}
 </style>
