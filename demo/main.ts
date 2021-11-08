@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import App from './App.vue';
-import VueEllipsis from '@/packages/VueEllipsis';
+import VueEllipsis from '../packages';
 
 Vue.config.productionTip = false;
 

@@ -79,10 +79,6 @@ export default class extends Vue {
   private observer!: ResizeObserver;
   private throttleFn!: (...args: any[]) => any;
 
-  private get realVisibleLine(): number {
-    return typeof this.visibleLine === 'undefined' ? this.maxLine : this.visibleLine;
-  }
-
   @Watch('text')
   @Watch('ellipsis')
   @Watch('useInnerHtml')
@@ -134,8 +130,10 @@ export default class extends Vue {
       : this.maxHeight;
 
     const visibleMaxHeight = typeof this.visibleHeight === 'undefined'
-        ? lineHeight * this.realVisibleLine
-        : this.visibleHeight;
+      ? typeof this.visibleLine === 'undefined'
+        ? maxHeight
+        : lineHeight * this.visibleLine
+      : this.visibleHeight;
 
     const height = getElementHeight(this.ref);
     // content will be truncated if the content's height bigger than Math.max(maxHeight, visibleMaxHeight).
@@ -191,6 +189,7 @@ export default class extends Vue {
         l = m;
       }
     }
+
     // Remove the exclude char at the end of the content.
     while (this.endExcludes.includes(currentText[currentText.length - 1])) {
       currentText = currentText.slice(0, -1);

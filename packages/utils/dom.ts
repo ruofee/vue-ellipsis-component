@@ -7,7 +7,7 @@ function createSpan(text: string) {
   return span;
 }
 
-export function wrapTextChildNodesWithSpan(node: Node) {
+export function wrapTextChildNodesWithSpan(node: Node): void {
   if (!isBrowser) {
     return;
   }

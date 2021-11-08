@@ -1,4 +1,4 @@
-import { computeStyle, getLineHeight, registerWordBreak } from '@/packages/VueEllipsis/utils/compute';
+import { computeStyle, getLineHeight, registerWordBreak } from '../../../packages/utils/compute';
 import { createDiv } from '../../utils';
 
 describe('computed.ts', () => {

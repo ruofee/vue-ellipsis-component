@@ -1,4 +1,4 @@
-import { isArray, isFunction, isNull, isString, isEffective } from '@/packages/VueEllipsis/utils/is';
+import { isArray, isFunction, isNull, isString, isEffective } from '../../../packages/utils/is';
 
 describe('is.ts', () => {
   // isNull

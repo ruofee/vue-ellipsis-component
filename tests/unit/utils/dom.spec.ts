@@ -1,4 +1,4 @@
-import { wrapTextChildNodesWithSpan } from '@/packages/VueEllipsis/utils/dom';
+import { wrapTextChildNodesWithSpan } from '../../../packages/utils/dom';
 import { createDiv } from '../../utils';
 
 describe('dom.ts', () => {
