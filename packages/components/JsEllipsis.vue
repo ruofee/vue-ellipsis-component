@@ -31,22 +31,19 @@ export default class extends Vue {
   private readonly text!: string;
 
   @Prop({ type: Number })
-  private readonly maxLine!: number;
-
-  @Prop({ type: Number })
   private readonly visibleLine!: number;
-
-  @Prop({ type: Number })
-  private readonly maxHeight!: number;
 
   @Prop({ type: Number })
   private readonly visibleHeight!: number;
 
+  @Prop({ type: Number })
+  private readonly maxLine!: number;
+
+  @Prop({ type: Number })
+  private readonly maxHeight!: number;
+
   @Prop({ type: Boolean })
   private readonly ellipsis!: boolean;
-
-  @Prop({ type: String })
-  private readonly ellipsisNode!: string;
 
   @Prop({ type: Array })
   private readonly endExcludes!: string[];
@@ -130,9 +127,7 @@ export default class extends Vue {
       : this.maxHeight;
 
     const visibleMaxHeight = typeof this.visibleHeight === 'undefined'
-      ? typeof this.visibleLine === 'undefined'
-        ? maxHeight
-        : lineHeight * this.visibleLine
+      ? lineHeight * this.visibleLine
       : this.visibleHeight;
 
     const height = getElementHeight(this.ref);
@@ -262,7 +257,7 @@ export default class extends Vue {
         this.throttleFn = throttle(this.reflow, this.reflowThresholdOnResize);
       }
 
-      if (!isSupportResizeObserver) {
+      if (isSupportResizeObserver) {
         this.observer = new ResizeObserver(this.throttleFn);
         this.observer.observe(this.ref);
       } else {

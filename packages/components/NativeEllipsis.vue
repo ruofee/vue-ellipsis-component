@@ -1,7 +1,7 @@
 <template>
   <div
     :class="['vue-ellipsis-native', { ellipsis }]"
-    :style="{ webkitLineClamp: maxLine }">
+    :style="{ webkitLineClamp: visibleLine }">
     <span v-if="useInnerHtml" v-html="text" class="vue-ellipsis-native-html" />
     <span v-else class="vue-ellipsis-native-text">{{ text }}</span>
   </div>
@@ -18,7 +18,7 @@ export default class extends Vue {
   private readonly text!: string;
 
   @Prop({ type: Number })
-  private readonly maxLine!: number;
+  private readonly visibleLine!: number;
 
   @Prop({ type: Boolean })
   private readonly ellipsis!: boolean;

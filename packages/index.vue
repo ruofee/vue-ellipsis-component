@@ -3,17 +3,17 @@
     <native-ellipsis
       v-if="useNativeEllipsis"
       :text="text"
-      :max-line="maxLine"
+      :visible-line="visibleLine"
       :ellipsis="ellipsis"
       :use-inner-html="useInnerHtml" />
     <js-ellipsis
       v-else
       :text="text"
       :use-inner-html="useInnerHtml"
-      :max-line="maxLine"
       :visible-line="visibleLine"
-      :max-height="maxHeight"
       :visible-height="visibleHeight"
+      :max-line="maxLine"
+      :max-height="maxHeight"
       :ellipsis="ellipsis"
       :ellipsis-node="ellipsisNode"
       :end-excludes="endExcludes"
@@ -52,16 +52,16 @@ export default class extends Vue {
   private readonly text!: string;
 
   @Prop({ type: Number, default: 1 })
-  private readonly maxLine!: number;
-
-  @Prop({ type: Number })
   private readonly visibleLine!: number;
 
   @Prop({ type: Number })
-  private readonly maxHeight!: number;
+  private readonly visibleHeight!: number;
 
   @Prop({ type: Number })
-  private readonly visibleHeight!: number;
+  private readonly maxLine!: number;
+
+  @Prop({ type: Number })
+  private readonly maxHeight!: number;
 
   @Prop({ type: String })
   private readonly className!: string;
@@ -93,10 +93,10 @@ export default class extends Vue {
   private get useNativeEllipsis(): boolean {
     const useNativeEllipsis =
       isSupportNativeEllipsis &&
+      (typeof this.maxLine === 'undefined' || this.maxLine === this.visibleLine) &&
       this.endExcludes.length === 0 &&
       this.ellipsisNode === ELLIPSIS_NODE &&
       typeof this.$slots.ellipsisNode === 'undefined' &&
-      typeof this.visibleLine === 'undefined' &&
       typeof this.maxHeight === 'undefined' &&
       typeof this.visibleHeight === 'undefined' &&
       typeof this.onReflow === 'undefined' &&
