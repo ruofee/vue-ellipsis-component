@@ -23,18 +23,18 @@ describe('vue-ellipsis.vue', () => {
     expect(wrapper.text()).toBe(text);
   });
 
-  it('[native-ellipsis] max-line 是否生效', () => {
-    const maxLine = 2;
+  it('[native-ellipsis] visibleLine 是否生效', () => {
+    const visibleLine = 2;
     const wrapper = getWrapper({
       propsData: {
         text,
-        maxLine,
+        visibleLine,
       },
     });
 
     const el = wrapper.find('.vue-ellipsis-native')?.vm.$el;
 
-    expect(parseInt((el as HTMLElement)?.style?.webkitLineClamp, 10)).toBe(maxLine);
+    expect(parseInt((el as HTMLElement)?.style?.webkitLineClamp, 10)).toBe(visibleLine);
   });
 
   it('[native-ellipsis] useInnerHtml 是否生效', () => {
