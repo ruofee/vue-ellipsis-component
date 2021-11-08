@@ -1,7 +1,7 @@
 // a throttle function using window.requestAnimationFrame
-export function frameThrottle(fn: (...args: any[]) => any): (...args: any[]) => any {
+export function frameThrottle(fn: (...args: unknown[]) => unknown): (...args: unknown[]) => unknown {
   let lock = false;
-  return (...args: any[]) => {
+  return (...args: unknown[]) => {
     if (lock) {
       return;
     }
@@ -16,11 +16,11 @@ export function frameThrottle(fn: (...args: any[]) => any): (...args: any[]) => 
 }
 
 // normal throttle function
-export function throttle(fn: (...args: any[]) => any, threshold = 60): (...args: any[]) => any {
+export function throttle(fn: (...args: unknown[]) => unknown, threshold = 60): (...args: unknown[]) => unknown {
   let last: number;
   let timer: number;
 
-  return (...args: any[]) => {
+  return (...args: unknown[]) => {
     // @ts-ignore
     const context = this;
     const now = +new Date();

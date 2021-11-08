@@ -2,7 +2,7 @@ import { VueConstructor } from 'vue';
 import VueEllipsis from '../../packages/index.vue';
 import { mount, MountOptions } from '@vue/test-utils';
 
-const getWrapper = (options?: MountOptions<any>) => mount(VueEllipsis as VueConstructor, options);
+const getWrapper = (options?: MountOptions<Vue>) => mount(VueEllipsis as VueConstructor, options);
 const text = '这是一段非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常长的文本';
 const html = '<b>这是一段</b>非常非常非常非常非常非常非常非常非常非常非常非常非常长的文本';
 

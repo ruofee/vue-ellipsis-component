@@ -4,7 +4,7 @@
  * @param {string} prop The style property.
  * @returns {number}
  */
-export function computeStyle(element: HTMLElement, prop: string) {
+export function computeStyle(element: HTMLElement, prop: string): string {
   if (!window.getComputedStyle) {
     // IE
     (window as any).getComputedStyle = function(el: any) {
