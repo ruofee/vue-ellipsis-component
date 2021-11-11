@@ -2,9 +2,10 @@
   <div id="app">
     <div class="ellipsis-wrapper">
       <vue-ellipsis
-        :max-height="40"
-        reflowOnResize
-        text="这是一段非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常长的话">
+        :visible-line="1"
+        :text="text"
+        ellipsis-node="...."
+        reflowOnResize>
       </vue-ellipsis>
     </div>
   </div>
@@ -16,7 +17,9 @@ import { Component, Vue } from 'vue-property-decorator';
 @Component({
   name: 'App',
 })
-export default class App extends Vue {}
+export default class App extends Vue {
+  private text = '这是一段非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常非常长的话';
+}
 </script>
 
 <style scoped>
