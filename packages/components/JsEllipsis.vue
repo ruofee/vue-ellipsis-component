@@ -122,13 +122,15 @@ export default class extends Vue {
     const lineHeight = getLineHeight(this.ref);
     const wordBreak = registerWordBreak(this.textRef);
 
-    const maxHeight = typeof this.maxHeight === 'undefined'
-      ? lineHeight * this.maxLine
-      : this.maxHeight;
-
     const visibleMaxHeight = typeof this.visibleHeight === 'undefined'
       ? lineHeight * this.visibleLine
       : this.visibleHeight;
+
+    const maxHeight = typeof this.maxHeight === 'undefined'
+      ? typeof this.maxLine === 'undefined'
+        ? visibleMaxHeight
+        : lineHeight * this.maxLine
+      : this.maxHeight;
 
     const height = getElementHeight(this.ref);
     // content will be truncated if the content's height bigger than Math.max(maxHeight, visibleMaxHeight).
@@ -175,7 +177,7 @@ export default class extends Vue {
 
       const temp = text.slice(l, m);
       textContainer.innerText = currentText + temp;
-      const { height } = container.getBoundingClientRect();
+      const height = getElementHeight(container);
 
       if (height > max) {
         r = m;
@@ -228,7 +230,7 @@ export default class extends Vue {
       // find the critical node
       while (i < nodes.length) {
         textContainer.appendChild(nodes[i]);
-        const { height } = container.getBoundingClientRect();
+        const height = getElementHeight(container);
 
         if (height > max) {
           break;

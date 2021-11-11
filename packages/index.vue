@@ -15,7 +15,6 @@
       :max-line="maxLine"
       :max-height="maxHeight"
       :ellipsis="ellipsis"
-      :ellipsis-node="ellipsisNode"
       :end-excludes="endExcludes"
       :reflow-on-resize="reflowOnResize"
       :reflow-threshold-on-resize="reflowThresholdOnResize"
