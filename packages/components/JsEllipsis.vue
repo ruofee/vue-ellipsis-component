@@ -13,15 +13,8 @@
 <script lang="ts">
 import { Vue, Component, Prop, Ref, Watch } from 'vue-property-decorator';
 import { getLineHeight, registerWordBreak, setWordBreak } from '../utils/compute';
-import { frameThrottle, throttle } from '../utils/throttle';
 import { wrapTextChildNodesWithSpan, getElementHeight } from '../utils/dom';
-import {
-  isFunction,
-  isEffective,
-  isSupportRequestAnimationFrame,
-  isString,
-  isSupportResizeObserver,
-} from '../utils/is';
+import { isFunction, isString, isSupportResizeObserver } from '../utils/is';
 
 @Component({
   name: 'js-ellipsis',
@@ -74,7 +67,6 @@ export default class extends Vue {
 
   private truncating!: boolean;
   private observer!: ResizeObserver;
-  private throttleFn!: (...args: any[]) => any;
 
   @Watch('text')
   @Watch('ellipsis')
@@ -249,21 +241,11 @@ export default class extends Vue {
     this.reflow();
 
     if (this.ref && this.reflowOnResize) {
-      // For performance, throttle the truncate frequency
-      if (!isEffective(this.reflowThresholdOnResize) && isSupportRequestAnimationFrame) {
-        // Resize by using window.requestAnimationFrame
-        // if it supported and "reflowThresholdOnResize" isn't effective.
-        this.throttleFn = frameThrottle(this.reflow);
-      } else {
-        // Or using setTimeout with throttle.
-        this.throttleFn = throttle(this.reflow, this.reflowThresholdOnResize);
-      }
-
       if (isSupportResizeObserver) {
-        this.observer = new ResizeObserver(this.throttleFn);
+        this.observer = new ResizeObserver(this.reflow);
         this.observer.observe(this.ref);
       } else {
-        window.addEventListener('resize', this.throttleFn);
+        window.addEventListener('resize', this.reflow);
       }
     }
   }
@@ -273,7 +255,7 @@ export default class extends Vue {
     if (isSupportResizeObserver && this.observer) {
       this.observer?.disconnect();
     } else {
-      window.removeEventListener('resize', this.throttleFn);
+      window.removeEventListener('resize', this.reflow);
     }
   }
 }

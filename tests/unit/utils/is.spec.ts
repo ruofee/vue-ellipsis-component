@@ -1,4 +1,4 @@
-import { isArray, isFunction, isNull, isString, isEffective } from '../../../packages/utils/is';
+import { isArray, isFunction, isNull, isString } from '../../../packages/utils/is';
 
 describe('is.ts', () => {
   // isNull
@@ -50,23 +50,6 @@ describe('is.ts', () => {
 
     arr.forEach(item => {
       expect(isArray(item)).not.toBeTruthy();
-    });
-  });
-
-  // isEffective
-  it('isEffective: input => not undefined and not null => true', () => {
-    const arr = [false, 12, '', () => {}, {}, []];
-
-    arr.forEach(item => {
-      expect(isEffective(item)).toBeTruthy();
-    });
-  });
-
-  it('isEffective: input => undefined or null => true', () => {
-    const arr = [undefined, null];
-
-    arr.forEach(item => {
-      expect(isEffective(item)).not.toBeTruthy();
     });
   });
 });
