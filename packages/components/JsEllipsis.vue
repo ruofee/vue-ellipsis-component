@@ -47,9 +47,6 @@ export default class extends Vue {
   @Prop({ type: Boolean })
   private readonly reflowOnResize!: boolean;
 
-  @Prop({ type: Number })
-  private readonly reflowThresholdOnResize!: number;
-
   @Prop({ type: Function })
   private readonly onReflow!: (ellipsis: boolean, text: string) => void;
 

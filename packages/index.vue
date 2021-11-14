@@ -17,7 +17,6 @@
       :ellipsis="ellipsis"
       :end-excludes="endExcludes"
       :reflow-on-resize="reflowOnResize"
-      :reflow-threshold-on-resize="reflowThresholdOnResize"
       :on-reflow="onReflow"
       :on-ellipsis-click="onEllipsisClick">
       <template v-slot:ellipsisNode>
@@ -79,9 +78,6 @@ export default class extends Vue {
 
   @Prop({ type: Boolean, default: false })
   private readonly reflowOnResize!: boolean;
-
-  @Prop({ type: Number })
-  private readonly reflowThresholdOnResize!: number;
 
   @Prop({ type: Function })
   private readonly onReflow!: (ellipsis: boolean, text: string) => void;
