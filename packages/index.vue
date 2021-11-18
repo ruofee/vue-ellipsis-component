@@ -1,5 +1,5 @@
 <template>
-  <div :class="['vue-ellipsis', className]">
+  <div class="vue-ellipsis">
     <native-ellipsis
       v-if="useNativeEllipsis"
       :text="text"
@@ -60,9 +60,6 @@ export default class extends Vue {
 
   @Prop({ type: Number })
   private readonly maxHeight!: number;
-
-  @Prop({ type: String })
-  private readonly className!: string;
 
   @Prop({ type: Boolean, default: true })
   private readonly ellipsis!: boolean;
