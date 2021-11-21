@@ -1,0 +1,7 @@
+{
+  "vue-ellipsis": {
+    "attributes": ["text", "visibleLine", "visibleHeight", "maxLine", "maxHeight", "ellipsis", "ellipsisNode", "endExcludes", "useInnerHtml", "reflowOnResize", "onReflow", "onEllipsisClick"],
+    "defaults": ["text", "visibleLine"],
+    "description": "A high performance and customized ellipsis component for vue."
+  }
+}

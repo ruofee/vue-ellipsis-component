@@ -1,7 +1,29 @@
 {
   "name": "vue-ellipsis-component",
-  "version": "0.1.0",
-  "private": true,
+  "author": {
+    "email": "ruofee@126.com",
+    "name": "ruofee",
+    "url": "http://ruofee.cn"
+  },
+  "version": "1.0.0",
+  "license": "MIT",
+  "keywords": [
+    "vue",
+    "ellipsis",
+    "clamp",
+    "component"
+  ],
+  "repository": {
+    "type": "github",
+    "url": "https://github.com/ruofee/vue-ellipsis-component"
+  },
+  "main": "lib/vue-ellipsis-component.js",
+  "typings": "lib/packages/index.d.ts",
+  "vetur": {
+    "tags": "vetur/tags.json",
+    "attributes": "vetur/attributes.json"
+  },
+  "files": ["lib", "packages", "vetur"],
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "NODE_ENV=production rollup -c ./build/rollup.config.js",
@@ -11,7 +33,6 @@
     "docs:dev": "vuepress dev docs",
     "docs:build": "vuepress build docs"
   },
-  "main": "./lib/vue-ellipsis-component.js",
   "devDependencies": {
     "@babel/core": "^7.16.0",
     "@babel/preset-env": "^7.16.4",

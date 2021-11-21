@@ -1,0 +1,50 @@
+{
+  "text": {
+    "type": "string",
+    "description": "Pure text that you want to ellipsis."
+  },
+  "visibleLine": {
+    "type": "number",
+    "description": "Line count of visible content(Can't bigger than maxLine)."
+  },
+  "visibleHeight": {
+    "type": "number",
+    "description": "Visible height of content. Priority higher than visibleLine."
+  },
+  "maxLine": {
+    "type": "number",
+    "description": "Content will be truncated if the line count of content is bigger than maxLine."
+  },
+  "maxHeight": {
+    "type": "number",
+    "description": "Content will be truncated if the height of content is bigger than maxHeight. Priority higher than maxLine."
+  },
+  "ellipsis": {
+    "type": "boolean",
+    "description": "Whether to ellipsis the text content."
+  },
+  "ellipsisNode": {
+    "type": "string",
+    "description": "Custom the ellipsis node."
+  },
+  "endExcludes": {
+    "type": "array",
+    "description": "The characters that want to remove at the end(Before ellipsis char)."
+  },
+  "useInnerHtml": {
+    "type": "boolean",
+    "description": "Parse text as html(Make sure the text that you pass is safe, or you may been attacked by XSS)."
+  },
+  "reflowOnResize": {
+    "type": "boolean",
+    "description": "Whether update when container resize. Default true if native ellipsis support, otherwise false."
+  },
+  "onReflow": {
+    "type": "function",
+    "description": "Reflow callback, ellipsis is whether the text have been truncated. text is the visible content after truncating(Not include ellipsis char)."
+  },
+  "onEllipsisClick": {
+    "type": "function",
+    "description": "Ellipsis click callback."
+  }
+}

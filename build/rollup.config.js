@@ -29,6 +29,12 @@ const plugins = [
   }),
   terser(),
 ];
+const onwarn = warning => {
+  if (warning.code === 'THIS_IS_UNDEFINED') {
+    return;
+  }
+  console.error(warning.message);
+};
 
 export default [{
   input,
@@ -41,12 +47,7 @@ export default [{
   },
   external,
   plugins,
-  onwarn: warning => {
-    if (warning.code === 'THIS_IS_UNDEFINED') {
-      return;
-    }
-    console.error(warning.message);
-  },
+  onwarn,
 }, {
   input,
   output: {
@@ -58,10 +59,5 @@ export default [{
   },
   external,
   plugins,
-  onwarn: warning => {
-    if (warning.code === 'THIS_IS_UNDEFINED') {
-      return;
-    }
-    console.error(warning.message);
-  },
+  onwarn,
 }];
