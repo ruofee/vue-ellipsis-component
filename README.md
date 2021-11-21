@@ -1,8 +1,8 @@
 # vue-ellipsis-component
 
-> A high performance and customized ellipsis component for vue. Support to custom ellipsis char, custom ellipsis node, end char filter, rich text, ...etc.
+> A high performance and customized ellipsis component for vue. Support to custom ellipsis char, custom ellipsis node, end char filter, rich text, ...etc. Inspired by: https://github.com/chenquincy/react-ellipsis
 >
-> 高性能、可自定义的 vue 文本缩略组件。支持自定义缩略符、尾文本过滤、富文本缩略等功能。
+> 高性能、可自定义的 vue 文本缩略组件。支持自定义缩略符、尾文本过滤、富文本缩略等功能。灵感来自于: https://github.com/chenquincy/react-ellipsis
 
 ![](https://img.shields.io/npm/v/vue-ellipsis-component.svg) ![](https://img.shields.io/npm/dt/vue-ellipsis-component.svg) ![](https://img.shields.io/badge/language-javascript-yellow.svg)
 
