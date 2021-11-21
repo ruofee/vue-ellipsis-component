@@ -250,7 +250,7 @@ export default class extends Vue {
   private beforeDestroy(): void {
     // Remove observer when component unmounted.
     if (isSupportResizeObserver && this.observer) {
-      this.observer?.disconnect();
+      this.observer.disconnect && this.observer.disconnect();
     } else {
       window.removeEventListener('resize', this.reflow);
     }
