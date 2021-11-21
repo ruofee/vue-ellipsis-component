@@ -1,4 +1,4 @@
-import VueEllipsis from 'vue-ellipsis-component';
+import VueEllipsis from '../../lib/vue-ellipsis-component';
 
 export default ({
   Vue
