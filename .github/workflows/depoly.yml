@@ -1,0 +1,39 @@
+name: vue-ellipsis-component-doc
+on:
+  push:
+    branches:
+      - master
+      - docs
+    paths-ignore: # 下列文件的变更不触发部署
+      - packages/*
+      - public/*
+      - test/*
+      - demo/*
+      - build/*
+      - README.md
+      - LICENSE
+      - .browserslistrc
+      - .gitignore
+      - babel.config.js
+      - tsconfig.json
+      - .eslintrc.js
+jobs:
+  deploy:
+    runs-on: ubuntu-18.04
+    steps:
+    - name: Checkout # 1. 将仓库内master分支的内容下载到工作目录
+      uses: actions/checkout@v2
+    - name: Install # 2. 安装依赖
+      run: yarn
+    - name: Build   # 3. 打包
+      run: yarn docs:build
+    - name: Deploy to Server # 4. 推到服务器
+      uses: AEnterprise/rsync-deploy@v1.0
+      env:
+        DEPLOY_KEY: ${{ secrets.KEY }} # 登录服务器的SSH私钥
+        ARGS: -avz --delete --exclude='*.pyc' # rsync参数，排除.pyc文件
+        SERVER_PORT: "22" # SSH端口
+        FOLDER: ./docs/.vuepress/dist/ # 要推送的文件夹，路径相对于代码仓库的根目录
+        SERVER_IP: ${{ secrets.HOST }} # 引用配置，服务器的IP/domain
+        USERNAME: ${{ secrets.USER }} # 引用配置，服务器登录名
+        SERVER_DESTINATION: ${{ secrets.PATH }} # 部署到目标文件夹
