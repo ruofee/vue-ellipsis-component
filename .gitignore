@@ -3,7 +3,7 @@ node_modules
 /dist
 /lib
 /docs/.vuepress/dist
-
+/coverage
 
 # local env files
 .env.local

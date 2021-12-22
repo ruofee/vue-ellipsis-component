@@ -7,7 +7,7 @@ import postcss from 'rollup-plugin-postcss';
 import { terser } from 'rollup-plugin-terser';
 import { name as packageName } from '../package.json';
 
-const input = 'packages/index.ts';
+const input = 'packages/main.ts';
 const globals = {
   vue: 'Vue',
 };
