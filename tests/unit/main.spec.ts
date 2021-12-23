@@ -1,6 +1,5 @@
 import Vue from 'vue';
 import Install, { VueEllipsis } from '../../packages/main';
-import VueEllipsisComponent from '../../packages/index.vue';
 
 describe('main.ts', () => {
   it('Global Install', () => {

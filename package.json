@@ -18,7 +18,7 @@
     "url": "https://github.com/ruofee/vue-ellipsis-component"
   },
   "main": "lib/vue-ellipsis-component.js",
-  "typings": "lib/packages/index.d.ts",
+  "typings": "lib/packages/main.d.ts",
   "vetur": {
     "tags": "vetur/tags.json",
     "attributes": "vetur/attributes.json"
