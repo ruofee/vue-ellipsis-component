@@ -12,7 +12,7 @@
 
 <script lang="ts">
 import { Vue, Component, Prop, Ref, Watch } from 'vue-property-decorator';
-import { getLineHeight, registerWordBreak, setWordBreak } from '../utils/compute';
+import { getLineHeight, registerWordBreak, setWordBreak, binarySearch } from '../utils/compute';
 import { wrapTextChildNodesWithSpan, getElementHeight } from '../utils/dom';
 import { isFunction, isString, isSupportResizeObserver } from '../utils/is';
 
@@ -154,33 +154,26 @@ export default class extends Vue {
   private truncateText(container: HTMLElement, textContainer: HTMLElement, max: number) {
     const text = textContainer.textContent || '';
     let currentText = '';
-    let l = 0;
-    let r = text.length;
     // Binary truncate text until get the max limit fragment of text.
-    while (l < r) {
-      const m = Math.floor((l + r) / 2);
-
-      if (l === m) {
-        break;
-      }
-
-      const temp = text.slice(l, m);
-      textContainer.innerText = currentText + temp;
-      const height = getElementHeight(container);
-
-      if (height > max) {
-        r = m;
-      } else {
-        currentText += temp;
-        l = m;
-      }
-    }
-
+    binarySearch(
+      0,
+      text.length,
+      (l, r, m) => {
+        const temp = text.slice(l, m);
+        textContainer.innerText = currentText + temp;
+        const height = getElementHeight(container);
+        const isExceededMaximun = height > max;
+        if (!isExceededMaximun) {
+          currentText += temp;
+        }
+        return isExceededMaximun;
+      },
+      (l, r, m) => l === m,
+    );
     // Remove the exclude char at the end of the content.
     while (this.endExcludes.includes(currentText[currentText.length - 1])) {
       currentText = currentText.slice(0, -1);
     }
-
     textContainer.innerText = currentText;
     // Callback after reflow.
     this.handleOnReflow(true, currentText);
@@ -189,10 +182,8 @@ export default class extends Vue {
   private truncateHTML(container: HTMLElement, textContainer: HTMLElement, max: number) {
     // only enter this function when container overflow.
     const children = textContainer.childNodes;
-
     if (children.length === 1) {
       const node = children[0] as HTMLElement;
-
       if (node.nodeType === Node.TEXT_NODE) {
         this.truncateText(container, textContainer, max);
       } else {
@@ -200,33 +191,55 @@ export default class extends Vue {
         // clear content to determine whether the empty node can be placed.
         node.innerHTML = '';
         const height = getElementHeight(container);
-
         if (height > max) {
           // return after remove the node, if overflow with empty node.
           textContainer.removeChild(node);
           this.handleOnReflow(true, textContainer.innerHTML);
           return;
         }
-
         node.innerHTML = html;
         // recursive truncate node
         this.truncateHTML(container, node, max);
       }
     } else {
       const nodes = [].slice.call(children);
-      textContainer.innerHTML = '';
-      let i = 0;
+      const _nodes: Array<never> = [];
       // find the critical node
-      while (i < nodes.length) {
-        textContainer.appendChild(nodes[i]);
-        const height = getElementHeight(container);
-
-        if (height > max) {
-          break;
-        }
-
-        i++;
-      }
+      let i = 0;
+      binarySearch(
+        0,
+        nodes.length,
+        (l, r, m) => {
+          textContainer.innerHTML = '';
+          const currentNodes = nodes.slice(l, m);
+          _nodes.forEach(node => {
+            textContainer.appendChild(node);
+          });
+          currentNodes.forEach(node => {
+            textContainer.appendChild(node);
+          });
+          const height = getElementHeight(container);
+          const isExceededMaximun = height > max;
+          if (!isExceededMaximun) {
+            currentNodes.forEach(node => {
+              _nodes.push(node);
+            });
+          }
+          return isExceededMaximun;
+        },
+        (l, r, m) => {
+          if (l === m) {
+            const height = getElementHeight(container);
+            const isExceededMaximun = height > max;
+            i = m;
+            if (!isExceededMaximun) {
+              textContainer.appendChild(nodes[i]);
+            }
+            return true;
+          }
+          return false;
+        },
+      );
       if (textContainer.childNodes[i]) {
         // truncate the critical node
         this.truncateHTML(container, textContainer.childNodes[i] as HTMLElement, max);

@@ -69,3 +69,31 @@ export function registerWordBreak(element: HTMLElement): string | void {
 export function setWordBreak(element: HTMLElement, value: string): void {
   element.style.wordBreak = value;
 }
+
+/**
+ * Return the middle value
+ * @param {number} l
+ * @param {number} r
+ * @returns {number}
+ */
+function getMiddle(l: number, r: number): number {
+  return Math.floor((l + r) / 2);
+}
+
+export function binarySearch(
+  l: number,
+  r: number,
+  handle: (l: number, r: number, m: number) => boolean,
+  handleResult: (l: number, r: number, m: number) => boolean): void {
+  while (l < r) {
+    const m = getMiddle(l, r);
+    if (handleResult(l, r, m)) {
+      break;
+    }
+    if (handle(l, r, m)) {
+      r = m;
+    } else {
+      l = m;
+    }
+  }
+}
