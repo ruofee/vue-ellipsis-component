@@ -30,7 +30,7 @@
     "test:unit": "vue-cli-service test:unit",
     "lint": "vue-cli-service lint",
     "demo": "vue-cli-service build",
-    "docs:dev": "vuepress dev docs",
+    "docs:dev": "yarn build && vuepress dev docs",
     "docs:build": "yarn build && vuepress build docs"
   },
   "devDependencies": {
