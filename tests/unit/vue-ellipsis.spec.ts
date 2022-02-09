@@ -12,7 +12,7 @@ describe('vue-ellipsis.vue', () => {
       propsData: { text },
     });
 
-    expect(wrapper.find('.vue-ellipsis-native')).toBeTruthy();
+    expect(wrapper.find('.vue-ellipsis-native').element).not.toBeUndefined();
   });
 
   it('[native-ellipsis] 文本内容是否正常渲染', () => {
@@ -32,7 +32,7 @@ describe('vue-ellipsis.vue', () => {
       },
     });
 
-    const el = wrapper.find('.vue-ellipsis-native')?.vm.$el;
+    const el = wrapper.find('.vue-ellipsis-native').element;
 
     expect(parseInt((el as HTMLElement)?.style?.webkitLineClamp, 10)).toBe(visibleLine);
   });
@@ -45,7 +45,7 @@ describe('vue-ellipsis.vue', () => {
       },
     });
 
-    expect(wrapper.find('.vue-ellipsis-native-html')).toBeTruthy();
+    expect(wrapper.find('.vue-ellipsis-native-html').element).not.toBeUndefined();
   });
 
   it('[native-ellipsis] ellipsis 是否生效', () => {
@@ -56,7 +56,7 @@ describe('vue-ellipsis.vue', () => {
       },
     });
 
-    expect(wrapper.find('.ellipsis')).toBeTruthy();
+    expect(wrapper.find('.ellipsis').element).toBeUndefined();
   });
 
   it('[js-ellipsis] onEllipsisClick 是否生效', () => {
