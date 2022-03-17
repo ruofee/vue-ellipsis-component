@@ -13,7 +13,7 @@ import { Vue, Component, Prop } from 'vue-property-decorator';
 @Component({
   name: 'native-ellipsis',
 })
-export default class extends Vue {
+export default class NativeEllipsis extends Vue {
   @Prop({ type: String })
   private readonly text!: string;
 
