@@ -52,7 +52,7 @@ export function getLineHeight(element: HTMLElement): number {
     return height * 1.1;
   }
 
-  return parseInt(lineHeight, 10);
+  return parseFloat(lineHeight);
 }
 
 export function registerWordBreak(element: HTMLElement): string | void {
