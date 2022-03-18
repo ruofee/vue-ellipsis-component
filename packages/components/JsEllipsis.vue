@@ -19,7 +19,7 @@ import { isFunction, isString, isSupportResizeObserver } from '../utils/is';
 @Component({
   name: 'js-ellipsis',
 })
-export default class extends Vue {
+export default class JsEllipsis extends Vue {
   @Prop({ type: String, required: true })
   private readonly text!: string;
 

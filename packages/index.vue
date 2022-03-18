@@ -45,7 +45,7 @@ function getDefaultEndExcludes(): string[] {
     JsEllipsis,
   },
 })
-export default class extends Vue {
+export default class VueEllipsisComponent extends Vue {
   @Prop({ type: String, required: true })
   private readonly text!: string;
 
