@@ -17,12 +17,12 @@
     "type": "github",
     "url": "https://github.com/ruofee/vue-ellipsis-component"
   },
-  "main": "lib/vue-ellipsis-component.js",
-  "module": "lib/vue-ellipsis-component.es.js",
+  "main": "./lib/vue-ellipsis-component.js",
+  "module": "./lib/vue-ellipsis-component.es.js",
   "exports": {
     ".": {
-      "import": "lib/vue-ellipsis-component.es.js",
-      "require": "lib/vue-ellipsis-component.js"
+      "import": "./lib/vue-ellipsis-component.es.js",
+      "require": "./lib/vue-ellipsis-component.js"
     }
   },
   "typings": "types/index.d.ts",
@@ -36,8 +36,9 @@
     "vetur"
   ],
   "scripts": {
-    "dev": "APP_ENV=development vite",
-    "build": "APP_ENV=production vite build",
+    "dev": "vite",
+    "build": "vite build",
+    "test": "vitest",
     "lint": "eslint ./packages --ext .vue,.js,.ts,.jsx,.tsx --fix",
     "docs:dev": "yarn build && vuepress dev docs",
     "docs:build": "yarn build && vuepress build docs"
@@ -48,9 +49,12 @@
     "@vue/eslint-config-typescript": "^10.0.0",
     "eslint": "^8.11.0",
     "eslint-plugin-vue": "^8.5.0",
+    "jsdom": "^19.0.0",
     "typescript": "~4.1.5",
     "vite": "^2.8.6",
+    "vite-plugin-eslint": "^1.3.0",
     "vite-plugin-vue2": "^1.9.3",
+    "vitest": "^0.7.4",
     "vue": "^2.6.11",
     "vue-class-component": "^7.2.3",
     "vue-property-decorator": "^9.1.2",
@@ -58,5 +62,8 @@
   },
   "peerDependencies": {
     "vue": "^2.6.11"
+  },
+  "dependencies": {
+    "@vue/test-utils": "1.3.0"
   }
 }
