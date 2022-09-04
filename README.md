@@ -6,6 +6,8 @@
 
 ![](https://img.shields.io/npm/v/vue-ellipsis-component.svg) ![](https://img.shields.io/npm/dt/vue-ellipsis-component.svg) ![](https://img.shields.io/badge/language-javascript-yellow.svg)
 
+如果你使用的是 vue 3.x 版本，可以移步 [vue-ellipsis-3](https://github.com/ruofee/vue-ellipsis-3)！
+
 ## Docs
 
 - [中文文档](http://vue-ellipsis.ruofee.cn/)
