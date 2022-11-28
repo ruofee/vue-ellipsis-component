@@ -24,5 +24,5 @@ export function wrapTextChildNodesWithSpan(node: Node): void {
 }
 
 export function getElementHeight(element: HTMLElement): number {
-  return element.getBoundingClientRect().height;
+  return element.clientHeight;
 }
