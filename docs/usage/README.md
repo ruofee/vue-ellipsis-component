@@ -64,7 +64,7 @@
 
 ## 尾文本过滤
 
-通过设置 `endExcludes` 过滤尾文本。
+通过设置 `endExcludes` 过滤尾文本，支持使用字符串和正则表达式。
 
 <code-wrapper name="getting-started-end-excludes-demo"></code-wrapper>
 

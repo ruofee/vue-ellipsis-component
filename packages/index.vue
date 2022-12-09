@@ -34,7 +34,7 @@ import JsEllipsis from './components/JsEllipsis.vue';
 import { isSupportNativeEllipsis } from './utils/is';
 import { ELLIPSIS_NODE } from './const';
 
-function getDefaultEndExcludes(): string[] {
+function getDefaultEndExcludes(): (string | RegExp)[] {
   return [];
 }
 
@@ -68,7 +68,7 @@ export default class VueEllipsisComponent extends Vue {
   private readonly ellipsisNode!: string;
 
   @Prop({ type: Array, default: getDefaultEndExcludes })
-  private readonly endExcludes!: string[];
+  private readonly endExcludes!: (string | RegExp)[];
 
   @Prop({ type: Boolean, default: false })
   private readonly useInnerHtml!: boolean;

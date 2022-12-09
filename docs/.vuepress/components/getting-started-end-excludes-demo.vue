@@ -1,8 +1,8 @@
 <template>
   <div class="wrapper">
     <vue-ellipsis
-      :end-excludes="['.', ',']"
-      text="除了文本内容全是标点符号.,.,.,">
+      :end-excludes="['.', ',', /[1-5]/]"
+      text="保留下来的文本内容612345.,.,">
     </vue-ellipsis>
   </div>
 </template>

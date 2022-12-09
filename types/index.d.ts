@@ -8,7 +8,7 @@ declare class VueEllipsis extends Vue {
   maxHeight: number | string;
   ellipsis: boolean;
   ellipsisNode: string;
-  endExcludes: Array<string>;
+  endExcludes: Array<string | RegExp>;
   useInnerHtml: boolean;
   reflowOnResize: boolean;
   onReflow: (ellipsis: boolean, text: string) => void;

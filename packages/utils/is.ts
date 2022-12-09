@@ -1,8 +1,8 @@
-export function isNull(variable: unknown): boolean {
-  return variable === null;
+export function isRegExp(variable: unknown): variable is RegExp {
+  return variable instanceof RegExp;
 }
 
-export function isString(variable: unknown): boolean {
+export function isString(variable: unknown): variable is string {
   return typeof variable === 'string';
 }
 

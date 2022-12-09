@@ -14,7 +14,7 @@
 import { Vue, Component, Prop, Ref, Watch } from 'vue-property-decorator';
 import { getLineHeight, registerWordBreak, setWordBreak, binarySearch } from '../utils/compute';
 import { wrapTextChildNodesWithSpan, getElementHeight } from '../utils/dom';
-import { isFunction, isString, isSupportResizeObserver } from '../utils/is';
+import { isFunction, isString, isRegExp, isSupportResizeObserver } from '../utils/is';
 
 @Component({
   name: 'js-ellipsis',
@@ -39,7 +39,7 @@ export default class JsEllipsis extends Vue {
   private readonly ellipsis!: boolean;
 
   @Prop({ type: Array })
-  private readonly endExcludes!: string[];
+  private readonly endExcludes!: (string | RegExp)[];
 
   @Prop({ type: Boolean })
   private readonly useInnerHtml!: boolean;
@@ -127,7 +127,7 @@ export default class JsEllipsis extends Vue {
       this.handleOnReflow(false, this.text);
 
       if (isString(wordBreak)) {
-        setWordBreak(this.textRef, wordBreak as string);
+        setWordBreak(this.textRef, wordBreak);
       }
 
       return;
@@ -145,7 +145,7 @@ export default class JsEllipsis extends Vue {
     }
 
     if (isString(wordBreak)) {
-      setWordBreak(this.textRef, wordBreak as string);
+      setWordBreak(this.textRef, wordBreak);
     }
 
     this.truncating = false;
@@ -171,9 +171,7 @@ export default class JsEllipsis extends Vue {
       (l, r, m) => l === m,
     );
     // Remove the exclude char at the end of the content.
-    while (this.endExcludes.includes(currentText[currentText.length - 1])) {
-      currentText = currentText.slice(0, -1);
-    }
+    currentText = this.handleEndExcludes(currentText);
     textContainer.innerText = currentText;
     // Callback after reflow.
     this.handleOnReflow(true, currentText);
@@ -245,6 +243,26 @@ export default class JsEllipsis extends Vue {
         this.truncateHTML(container, textContainer.childNodes[i] as HTMLElement, max);
       }
     }
+  }
+
+  private isTextInEndExcludes(text: string) {
+    for (const item of this.endExcludes) {
+      if (isRegExp(item)) {
+        if (item.test(text)) {
+          return true;
+        }
+      } else if (item === text) {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  private handleEndExcludes(text: string) {
+    while (!!text.length && this.isTextInEndExcludes(text[text.length - 1])) {
+      text = text.slice(0, -1);
+    }
+    return text;
   }
 
   private mounted(): void {
