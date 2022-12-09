@@ -13,6 +13,10 @@
 - [中文文档](http://vue-ellipsis.ruofee.cn/)
 - English doc (building)
 
+## Demo
+
+![demo.gif](./images/demo.gif)
+
 ## License
 
 MIT
