@@ -23,6 +23,8 @@ jobs:
     steps:
     - name: Checkout # 1. 将仓库内master分支的内容下载到工作目录
       uses: actions/checkout@v2
+    - name: Install Node
+      run: yarn global add n && n 16.17.1
     - name: Install # 2. 安装依赖
       run: yarn
     - name: Build   # 3. 打包
