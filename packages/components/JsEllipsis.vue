@@ -180,6 +180,10 @@ export default class JsEllipsis extends Vue {
   private truncateHTML(container: HTMLElement, textContainer: HTMLElement, max: number) {
     // only enter this function when container overflow.
     const children = textContainer.childNodes;
+    if (children.length === 0) {
+      // remove parent node
+      return false;
+    }
     if (children.length === 1) {
       const node = children[0] as HTMLElement;
       if (node.nodeType === Node.TEXT_NODE) {
@@ -240,7 +244,11 @@ export default class JsEllipsis extends Vue {
       );
       if (textContainer.childNodes[i]) {
         // truncate the critical node
-        this.truncateHTML(container, textContainer.childNodes[i] as HTMLElement, max);
+        const truncateResult = this.truncateHTML(container, textContainer.childNodes[i] as HTMLElement, max);
+        // if truncateResult be false, it means that node should be removed
+        if (truncateResult === false) {
+          textContainer.removeChild(textContainer.childNodes[i]);
+        }
       }
     }
   }
