@@ -1,7 +1,7 @@
 import { defineConfig } from 'vitest/config'
 import { createVuePlugin } from 'vite-plugin-vue2';
 import VitePluginEslint from 'vite-plugin-eslint';
-import cssExtractPlugin from './build/cssExtractPlugin';
+import cssExtractPlugin from 'vite-plugin-css-injected-by-js';
 import packageJson from './package.json';
 const path = require('path');
 
