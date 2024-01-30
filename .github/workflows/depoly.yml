@@ -1,5 +1,6 @@
 name: vue-ellipsis-component-doc
 on:
+  workflow_dispatch:
   push:
     branches:
       - master
