@@ -1,4 +1,4 @@
-# vue-ellipsis-component
+#vue-ellipsis-component
 
 > A high performance and customized ellipsis component for vue. Support to custom ellipsis char, custom ellipsis node, end char filter, rich text, ...etc. Only 5 KB after gzip. Inspired by: https://github.com/chenquincy/react-ellipsis
 >
@@ -32,4 +32,4 @@ yarn serve
 yarn docs:dev
 ```
 
-If you want to contribute your code, send a pull request in [github](https://github.com/ruofee/vue-ellipsis-component).
+If you want to contribute your code, send a pull request in [Github](https://github.com/ruofee/vue-ellipsis-component).
