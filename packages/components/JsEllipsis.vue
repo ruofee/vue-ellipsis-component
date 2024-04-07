@@ -7,6 +7,12 @@
       @click="handleEllipsisClick">
       <slot name="ellipsisNode"></slot>
     </span>
+    <span
+      v-if="!ellipsis && $slots.unellipsisNode"
+      class="vue-ellipsis-js-unellipsis"
+      @click="handleUnellipsisClick">
+      <slot name="unellipsisNode"></slot>
+    </span>
   </div>
 </template>
 
@@ -53,6 +59,9 @@ export default class JsEllipsis extends Vue {
   @Prop({ type: Function })
   private readonly onEllipsisClick!: () => void;
 
+  @Prop({ type: Function })
+  private readonly onUnellipsisClick!: () => void;
+
   @Ref('ref')
   private ref!: HTMLElement;
 
@@ -89,6 +98,11 @@ export default class JsEllipsis extends Vue {
     if (this.onEllipsisClick && isFunction(this.onEllipsisClick)) {
       this.onEllipsisClick();
     }
+  }
+
+  // callback of unellipsis click event
+  private handleUnellipsisClick() {
+    this.onUnellipsisClick?.();
   }
 
   private reflow(): void {

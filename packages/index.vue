@@ -18,10 +18,15 @@
       :end-excludes="endExcludes"
       :reflow-on-resize="reflowOnResize"
       :on-reflow="onReflow"
-      :on-ellipsis-click="onEllipsisClick">
+      :on-ellipsis-click="onEllipsisClick"
+      :on-unellipsis-click="onUnellipsisClick">
       <template v-slot:ellipsisNode>
         <template v-if="!$slots.ellipsisNode">{{ ellipsisNode }}</template>
         <slot name="ellipsisNode"></slot>
+      </template>
+      <template v-if="unellipsisNode || $slots.unellipsisNode" v-slot:unellipsisNode>
+        <slot v-if="$slots.unellipsisNode" name="unellipsisNode"></slot>
+        <template v-else>{{ unellipsisNode }}</template>
       </template>
     </js-ellipsis>
   </div>
@@ -67,6 +72,9 @@ export default class VueEllipsisComponent extends Vue {
   @Prop({ type: String, default: ELLIPSIS_NODE })
   private readonly ellipsisNode!: string;
 
+  @Prop({ type: String })
+  private readonly unellipsisNode!: string;
+
   @Prop({ type: Array, default: getDefaultEndExcludes })
   private readonly endExcludes!: (string | RegExp)[];
 
@@ -82,6 +90,9 @@ export default class VueEllipsisComponent extends Vue {
   @Prop({ type: Function })
   private readonly onEllipsisClick!: () => void;
 
+  @Prop({ type: Function })
+  private readonly onUnellipsisClick!: () => void;
+
   private get useNativeEllipsis(): boolean {
     const useNativeEllipsis =
       isSupportNativeEllipsis &&
@@ -89,10 +100,13 @@ export default class VueEllipsisComponent extends Vue {
       this.endExcludes.length === 0 &&
       this.ellipsisNode === ELLIPSIS_NODE &&
       typeof this.$slots.ellipsisNode === 'undefined' &&
+      !this.unellipsisNode &&
+      typeof this.$slots.unellipsisNode === 'undefined' &&
       typeof this.maxHeight === 'undefined' &&
       typeof this.visibleHeight === 'undefined' &&
       typeof this.onReflow === 'undefined' &&
-      typeof this.onEllipsisClick === 'undefined';
+      typeof this.onEllipsisClick === 'undefined' &&
+      typeof this.onUnellipsisClick === 'undefined';
 
     return useNativeEllipsis;
   }

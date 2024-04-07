@@ -114,4 +114,36 @@ describe('vue-ellipsis.vue', () => {
 
     expect(wrapper.find('.vue-ellipsis-js-ellipsis').text()).toBe(ellipsisNode);
   });
+
+  it('[js-ellipsis] unellipsisNode 是否生效', () => {
+    const unellipsisNode = '777777';
+
+    const wrapper = getWrapper({
+      propsData: {
+        ellipsis: false,
+        text,
+        unellipsisNode,
+      },
+    });
+
+    expect(wrapper.find('.vue-ellipsis-js-unellipsis').text()).toBe(unellipsisNode);
+  });
+
+  it('[js-ellipsis] onUnellipsisClick 是否生效', () => {
+    let haveBeenCalled = false;
+
+    const wrapper = getWrapper({
+      propsData: {
+        text,
+        ellipsis: false,
+        unellipsisNode: '11',
+        onUnellipsisClick() {
+          haveBeenCalled = true;
+        },
+      },
+    });
+
+    wrapper.find('.vue-ellipsis-js-unellipsis').trigger('click');
+    expect(haveBeenCalled).toBeTruthy();
+  });
 });
