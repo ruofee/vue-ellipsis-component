@@ -27,7 +27,7 @@ jobs:
     - name: Install Node
       run: yarn global add n && sudo n 16.17.1
     - name: Install # 2. 安装依赖
-      run: yarn config set registry https://registry.npmjs.org/ && yarn
+      run: yarn config set strict-ssl false && yarn config set registry https://registry.npmjs.org/ && yarn
     - name: Build   # 3. 打包
       run: yarn docs:build
     - name: Deploy to Server
