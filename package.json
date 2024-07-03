@@ -32,7 +32,8 @@
   },
   "files": [
     "lib",
-    "vetur"
+    "vetur",
+    "types"
   ],
   "scripts": {
     "dev": "vite",
