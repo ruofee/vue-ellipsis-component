@@ -1,5 +1,9 @@
 # 快速开始
 
+::: tip ⭐️ ⭐️ ⭐️
+如果组件对你有帮助，非常期待你的 **[Star](https://github.com/ruofee/vue-ellipsis-component)** ！！
+:::
+
 ## 安装
 
 ### NPM
