@@ -27,52 +27,52 @@ import { isFunction, isString, isRegExp, isSupportResizeObserver } from '../util
 })
 export default class JsEllipsis extends Vue {
   @Prop({ type: String, required: true })
-  private readonly text!: string;
+  readonly text!: string;
 
   @Prop({ type: Number })
-  private readonly visibleLine!: number;
+  readonly visibleLine!: number;
 
   @Prop({ type: Number })
-  private readonly visibleHeight!: number;
+  readonly visibleHeight!: number;
 
   @Prop({ type: Number })
-  private readonly maxLine!: number;
+  readonly maxLine!: number;
 
   @Prop({ type: Number })
-  private readonly maxHeight!: number;
+  readonly maxHeight!: number;
 
   @Prop({ type: Boolean })
-  private readonly ellipsis!: boolean;
+  readonly ellipsis!: boolean;
 
   @Prop({ type: Array })
-  private readonly endExcludes!: (string | RegExp)[];
+  readonly endExcludes!: (string | RegExp)[];
 
   @Prop({ type: Boolean })
-  private readonly useInnerHtml!: boolean;
+  readonly useInnerHtml!: boolean;
 
   @Prop({ type: Boolean })
-  private readonly reflowOnResize!: boolean;
+  readonly reflowOnResize!: boolean;
 
   @Prop({ type: Function })
-  private readonly onReflow!: (ellipsis: boolean, text: string) => void;
+  readonly onReflow!: (ellipsis: boolean, text: string) => void;
 
   @Prop({ type: Function })
-  private readonly onEllipsisClick!: () => void;
+  readonly onEllipsisClick!: () => void;
 
   @Prop({ type: Function })
-  private readonly onUnellipsisClick!: () => void;
+  readonly onUnellipsisClick!: () => void;
 
   @Ref('ref')
-  private ref!: HTMLElement;
+  ref!: HTMLElement;
 
   @Ref('textRef')
-  private textRef!: HTMLElement;
+  textRef!: HTMLElement;
 
   @Ref('ellipsisRef')
-  private ellipsisRef!: HTMLElement;
+  ellipsisRef!: HTMLElement;
 
-  private truncating!: boolean;
-  private observer!: ResizeObserver;
+  truncating!: boolean;
+  observer!: ResizeObserver;
 
   @Watch('text')
   @Watch('ellipsis')
@@ -83,29 +83,29 @@ export default class JsEllipsis extends Vue {
   @Watch('visibleHeight')
   @Watch('ellipsisNode')
   @Watch('endExcludes')
-  private onWatch(): void {
+  onWatch(): void {
     this.reflow();
   }
 
-  private handleOnReflow(ellipsis: boolean, result: string): void {
+  handleOnReflow(ellipsis: boolean, result: string): void {
     if (this.onReflow && isFunction(this.onReflow)) {
       this.onReflow(ellipsis, result);
     }
   }
 
   // callback of ellipsis click event
-  private handleEllipsisClick() {
+  handleEllipsisClick() {
     if (this.onEllipsisClick && isFunction(this.onEllipsisClick)) {
       this.onEllipsisClick();
     }
   }
 
   // callback of unellipsis click event
-  private handleUnellipsisClick() {
+  handleUnellipsisClick() {
     this.onUnellipsisClick?.();
   }
 
-  private reflow(): void {
+  reflow(): void {
     if (!this.ref || !this.textRef || !this.ellipsisRef || this.truncating) {
       return;
     }
@@ -165,7 +165,7 @@ export default class JsEllipsis extends Vue {
     this.truncating = false;
   }
 
-  private truncateText(container: HTMLElement, textContainer: HTMLElement, max: number) {
+  truncateText(container: HTMLElement, textContainer: HTMLElement, max: number) {
     const text = textContainer.textContent || '';
     let currentText = '';
     // Binary truncate text until get the max limit fragment of text.
@@ -191,7 +191,7 @@ export default class JsEllipsis extends Vue {
     this.handleOnReflow(true, currentText);
   }
 
-  private truncateHTML(container: HTMLElement, textContainer: HTMLElement, max: number) {
+  truncateHTML(container: HTMLElement, textContainer: HTMLElement, max: number) {
     // only enter this function when container overflow.
     const children = textContainer.childNodes;
     if (children.length === 0) {
@@ -219,7 +219,7 @@ export default class JsEllipsis extends Vue {
       }
     } else {
       const nodes = [].slice.call(children);
-      const _nodes: Array<never> = [];
+      const _nodes: Array<Node> = [];
       // find the critical node
       let i = 0;
       binarySearch(
@@ -267,7 +267,7 @@ export default class JsEllipsis extends Vue {
     }
   }
 
-  private isTextInEndExcludes(text: string) {
+  isTextInEndExcludes(text: string) {
     for (const item of this.endExcludes) {
       if (isRegExp(item)) {
         if (item.test(text)) {
@@ -280,14 +280,14 @@ export default class JsEllipsis extends Vue {
     return false;
   }
 
-  private handleEndExcludes(text: string) {
+  handleEndExcludes(text: string) {
     while (!!text.length && this.isTextInEndExcludes(text[text.length - 1])) {
       text = text.slice(0, -1);
     }
     return text;
   }
 
-  private mounted(): void {
+  mounted(): void {
     this.reflow();
 
     if (this.ref && this.reflowOnResize) {
@@ -300,7 +300,7 @@ export default class JsEllipsis extends Vue {
     }
   }
 
-  private beforeDestroy(): void {
+  beforeDestroy(): void {
     // Remove observer when component unmounted.
     if (isSupportResizeObserver && this.observer) {
       this.observer.disconnect && this.observer.disconnect();
