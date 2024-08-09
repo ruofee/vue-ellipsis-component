@@ -9,6 +9,7 @@
     </span>
     <span
       v-if="!ellipsis && $slots.unellipsisNode"
+      ref="unellipsisRef"
       class="vue-ellipsis-js-unellipsis"
       @click="handleUnellipsisClick">
       <slot name="unellipsisNode"></slot>
@@ -70,6 +71,9 @@ export default class JsEllipsis extends Vue {
 
   @Ref('ellipsisRef')
   ellipsisRef!: HTMLElement;
+
+  @Ref('unellipsisRef')
+  unellipsisRef!: HTMLElement;
 
   truncating!: boolean;
   observer!: ResizeObserver;
@@ -149,7 +153,9 @@ export default class JsEllipsis extends Vue {
 
     this.truncating = true;
     this.ellipsisRef.style.display = 'inline';
-
+    if (this.unellipsisRef) {
+      this.unellipsisRef.style.display = 'none';
+    }
     if (this.useInnerHtml) {
       // wrap the text children node with span element.
       wrapTextChildNodesWithSpan(this.textRef);
@@ -157,7 +163,9 @@ export default class JsEllipsis extends Vue {
     } else {
       this.truncateText(this.ref, this.textRef, visibleMaxHeight);
     }
-
+    if (this.unellipsisRef) {
+      this.unellipsisRef.style.display = 'inline';
+    }
     if (isString(wordBreak)) {
       setWordBreak(this.textRef, wordBreak);
     }
