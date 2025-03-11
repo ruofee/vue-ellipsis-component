@@ -12,7 +12,7 @@ React 版本：[react-ellipsis](https://github.com/chenquincy/react-ellipsis)
 
 ## Docs
 
-- [中文文档](https://vue-ellipsis-component.vercel.app/)
+- [中文文档](https://vue-ellipsis.ruofee.cn)
 - English doc (building)
 
 ## Demo
